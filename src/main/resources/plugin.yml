@@ -9,8 +9,6 @@ description: >
 authors:
   - vulgarmc
   - Lostgalaxy
-website: https://github.com/vulgarmc/MaceControl
-
 commands:
   macecontrol:
     description: Reloads the MaceControl configuration.
