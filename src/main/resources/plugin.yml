@@ -3,9 +3,9 @@ version: ${project.version}
 main: dev.macecontrol.MaceControl
 api-version: '1.21'
 description: >
-  Fine-grained control over Mace base damage, smash-attack fall-damage scaling,
+  Full control over Mace base damage, smash-attack fall-damage scaling,
   Density bonus per block, and Breach armor-penetration percentage.
-  Compatible with Paper 1.21.11 (Mounts of Mayhem).
+  Compatible with Paper 1.21.11.
 authors:
   - vulgarmc
   - Lostgalaxy
