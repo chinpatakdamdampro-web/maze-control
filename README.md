@@ -2,7 +2,7 @@
 
 > Fine-grained control over Mace damage, smash-attack scaling, Density, and Breach — for **Paper 1.21.11 (Mounts of Mayhem)**.
 
-[![Build MaceControl](https://github.com/chinpatakdamdampro/MaceControl/actions/workflows/build.yml/badge.svg)](https://github.com/chinpatakdamdampro/MaceControl/actions/workflows/build.yml)
+[![Build MaceControl](https://github.com/chinpatakdamdampro-web/MaceControl/actions/workflows/build.yml/badge.svg)](https://github.com/chinpatakdamdampro-web/MaceControl/actions/workflows/build.yml)
 ![Paper](https://img.shields.io/badge/Paper-1.21.11-blue)
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
