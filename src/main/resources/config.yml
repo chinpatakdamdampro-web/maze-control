@@ -1,0 +1,132 @@
+# ============================================================
+#   MaceControl  v1.0.0  |  Paper 1.21.11 (Mounts of Mayhem)
+# ============================================================
+#
+#  All values listed below match the VANILLA Minecraft 1.21
+#  defaults exactly.  Edit any value to nerf or buff the Mace
+#  on your server, then run  /macecontrol reload  in-game.
+#
+#  DAMAGE UNIT: all damage values are in "half-hearts" (HP).
+#  1 visible heart = 2 HP.  A player has 20 HP (10 hearts).
+# ============================================================
+
+mace:
+
+  # ── BASE DAMAGE ────────────────────────────────────────────
+  # Damage dealt by a fully-charged, ground-level normal swing.
+  #   Default (vanilla): 6.0 HP  (3 hearts)
+  #   Range suggestion : 1.0 – 20.0
+  base-damage: 6.0
+
+  # ── SMASH ATTACK FALL-DAMAGE SCALING ───────────────────────
+  # When a player falls 1.5+ blocks and hits a mob with the
+  # Mace, a "smash attack" triggers and adds BONUS damage
+  # based on the number of blocks fallen.
+  #
+  # Vanilla uses THREE tiers of bonus damage:
+  #
+  #   Tier 1 – first N blocks fallen        → damage-per-block-tier-1
+  #   Tier 2 – next M blocks fallen         → damage-per-block-tier-2
+  #   Tier 3 – every block beyond that      → damage-per-block-tier-3
+  #
+  # Vanilla defaults:
+  #   Tier 1 covers blocks 1 – 3   (tier-1-max-blocks: 3)
+  #   Tier 2 covers blocks 4 – 8   (tier-2-max-blocks: 5)
+  #   Tier 3 covers all blocks after that (no upper cap)
+  #
+  smash-attack:
+
+    # How many blocks are in the FIRST tier of bonus damage.
+    #   Default (vanilla): 3
+    tier-1-max-blocks: 3
+
+    # Bonus damage per block fallen in TIER 1  (blocks 1 – tier-1-max-blocks).
+    #   Default (vanilla): 4.0 HP per block
+    damage-per-block-tier-1: 4.0
+
+    # How many blocks are in the SECOND tier of bonus damage.
+    #   Default (vanilla): 5
+    tier-2-max-blocks: 5
+
+    # Bonus damage per block fallen in TIER 2.
+    #   Default (vanilla): 2.0 HP per block
+    damage-per-block-tier-2: 2.0
+
+    # Bonus damage per block fallen in TIER 3 (everything beyond tier 2).
+    #   Default (vanilla): 1.0 HP per block
+    damage-per-block-tier-3: 1.0
+
+    # Minimum fall distance (in blocks) required to trigger a smash attack.
+    #   Default (vanilla): 1.5
+    #   Increase to make smash attacks harder to trigger (e.g. 3.0 for PvP balance).
+    min-fall-blocks: 1.5
+
+
+# ── ENCHANTMENT MODIFIERS ────────────────────────────────────
+#
+#  These sections let you tune how Density and Breach behave
+#  per enchantment level.  Breach is split across 4 levels;
+#  Density is split across 5 levels.
+#
+enchantments:
+
+  # ── DENSITY ──────────────────────────────────────────────
+  # Density adds extra smash-attack damage per BLOCK FALLEN,
+  # on top of the base tier values above.
+  #
+  # Vanilla formula:  +0.5 HP × 0.25 per level, per block fallen.
+  # In practice (per level):
+  #   Level 1 → +0.5  HP per block
+  #   Level 2 → +1.0  HP per block
+  #   Level 3 → +1.5  HP per block
+  #   Level 4 → +2.0  HP per block
+  #   Level 5 → +2.5  HP per block  (max level)
+  #
+  # Each value below is the TOTAL extra HP added PER BLOCK FALLEN
+  # at that enchantment level.
+  #
+  density:
+    # Default (vanilla): 0.5 HP/block
+    level-1-bonus-per-block: 0.5
+
+    # Default (vanilla): 1.0 HP/block
+    level-2-bonus-per-block: 1.0
+
+    # Default (vanilla): 1.5 HP/block
+    level-3-bonus-per-block: 1.5
+
+    # Default (vanilla): 2.0 HP/block
+    level-4-bonus-per-block: 2.0
+
+    # Default (vanilla): 2.5 HP/block
+    level-5-bonus-per-block: 2.5
+
+  # ── BREACH ───────────────────────────────────────────────
+  # Breach reduces how much of the target's ARMOR DEFENSE
+  # is applied before damage is calculated.
+  #
+  # Vanilla formula:  armor effectiveness is reduced by 15% per level.
+  # In practice:
+  #   Level 1 → armor is 15% less effective  (0.85 × normal armor)
+  #   Level 2 → armor is 30% less effective  (0.70 × normal armor)
+  #   Level 3 → armor is 45% less effective  (0.55 × normal armor)
+  #   Level 4 → armor is 60% less effective  (0.40 × normal armor)  (max level)
+  #
+  # Each value below is the ARMOR REDUCTION FRACTION at that level
+  # (0.0 = no effect on armor; 1.0 = armor is completely ignored).
+  #
+  # Raise values to make Breach more powerful (more armor bypassed).
+  # Lower values to nerf it.
+  #
+  breach:
+    # Default (vanilla): 0.15  (15% armor reduction)
+    level-1-armor-reduction: 0.15
+
+    # Default (vanilla): 0.30  (30% armor reduction)
+    level-2-armor-reduction: 0.30
+
+    # Default (vanilla): 0.45  (45% armor reduction)
+    level-3-armor-reduction: 0.45
+
+    # Default (vanilla): 0.60  (60% armor reduction)
+    level-4-armor-reduction: 0.60

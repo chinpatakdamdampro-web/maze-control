@@ -1,0 +1,23 @@
+name: MaceControl
+version: ${project.version}
+main: dev.macecontrol.MaceControl
+api-version: '1.21'
+description: >
+  Fine-grained control over Mace base damage, smash-attack fall-damage scaling,
+  Density bonus per block, and Breach armor-penetration percentage.
+  Compatible with Paper 1.21.11 (Mounts of Mayhem).
+authors:
+  - vulgarmc
+  - Lostgalaxy
+website: https://github.com/vulgarmc/MaceControl
+
+commands:
+  macecontrol:
+    description: Reloads the MaceControl configuration.
+    usage: /macecontrol reload
+    permission: macecontrol.reload
+
+permissions:
+  macecontrol.reload:
+    description: Allows reloading the MaceControl config in-game.
+    default: op

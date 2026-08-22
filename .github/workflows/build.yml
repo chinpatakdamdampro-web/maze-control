@@ -1,0 +1,46 @@
+name: Build MaceControl
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    name: Build JAR
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Check out the repository ─────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Set up Java 21 (required by Paper 1.21.11) ───────────────────────
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven           # cache ~/.m2 to speed up subsequent runs
+
+      # ── 3. Build with Maven ─────────────────────────────────────────────────
+      - name: Build with Maven
+        run: mvn package --no-transfer-progress
+
+      # ── 4. Upload JAR as a workflow artifact (available on every push) ──────
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MaceControl-${{ github.sha }}
+          path: target/MaceControl-*.jar
+          if-no-files-found: error
+
+      # ── 5. On a release, attach the JAR to the GitHub Release page ──────────
+      - name: Attach JAR to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: target/MaceControl-*.jar
