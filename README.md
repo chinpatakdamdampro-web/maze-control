@@ -35,7 +35,7 @@ Every value defaults to vanilla — installing the plugin changes nothing until 
 
 ## Installation
 
-1. Download the latest JAR from [Releases](https://github.com/vulgarmc/MaceControl/releases) or grab a dev build from [Actions](https://github.com/vulgarmc/MaceControl/actions).
+1. Download the latest JAR from [Releases](https://github.com/chinpatakdamdampro-web/maze-control/releases) or grab a dev build from [Actions](https://github.com/chinpatakdamdampro-web/maze-control/actions).
 2. Drop it into your server's `plugins/` folder.
 3. Start or reload the server — `config.yml` is generated automatically.
 4. Edit `plugins/MaceControl/config.yml` to taste.
@@ -54,7 +54,7 @@ mvn package
 # output: target/MaceControl-1.0.0.jar
 ```
 
-GitHub Actions builds the JAR automatically on every push — see the [Actions tab](https://github.com/vulgarmc/MaceControl/actions).
+GitHub Actions builds the JAR automatically on every push — see the [Actions tab](https://github.com/chinpatakdamdampro-web/maze-control/actions).
 
 ---
 
@@ -129,8 +129,7 @@ enchantments:
 
 ## Authors
 
-- [vulgarmc](https://github.com/vulgarmc)
-- [Lostgalaxy](https://github.com/Lostgalaxy)
+- vulgarmc / lostgalaxy
 
 ## License
 
