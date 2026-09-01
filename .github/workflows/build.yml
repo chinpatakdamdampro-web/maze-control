@@ -30,17 +30,9 @@ jobs:
       - name: Build with Maven
         run: mvn package --no-transfer-progress
 
-      # ── 4. Rename JAR to a clean predictable filename ────────────────────────
-      - name: Rename JAR to clean filename
-        run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          cp target/MaceControl-*.jar target/MaceControl-${VERSION}.jar
-          echo "JAR_NAME=MaceControl-${VERSION}.jar" >> $GITHUB_ENV
-
-      # ── 5. Upload artifact ───────────────────────────────────────────────────
+      # ── 4. Upload artifact ───────────────────────────────────────────────────
       #
       #  NOTE: GitHub always wraps artifacts in a zip — this cannot be changed.
-      #  The zip will only contain one file inside: MaceControl-X.X.X.jar
       #  To get a raw JAR with NO unzipping needed, use either:
       #
       #    A) Releases page (best for distribution):
@@ -54,13 +46,13 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.JAR_NAME }}
-          path: target/${{ env.JAR_NAME }}
+          name: MaceControl
+          path: target/MaceControl-*.jar
           if-no-files-found: error
 
-      # ── 6. Attach raw JAR to GitHub Release (no zip, direct download) ────────
+      # ── 5. Attach raw JAR to GitHub Release (no zip, direct download) ────────
       - name: Attach JAR to GitHub Release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: target/${{ env.JAR_NAME }}
+          files: target/MaceControl-*.jar
