@@ -24,23 +24,43 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: maven           # cache ~/.m2 to speed up subsequent runs
+          cache: maven
 
-      # ── 3. Build with Maven ─────────────────────────────────────────────────
+      # ── 3. Build with Maven ──────────────────────────────────────────────────
       - name: Build with Maven
         run: mvn package --no-transfer-progress
 
-      # ── 4. Upload JAR as a workflow artifact (available on every push) ──────
+      # ── 4. Rename JAR to a clean predictable filename ────────────────────────
+      - name: Rename JAR to clean filename
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          cp target/MaceControl-*.jar target/MaceControl-${VERSION}.jar
+          echo "JAR_NAME=MaceControl-${VERSION}.jar" >> $GITHUB_ENV
+
+      # ── 5. Upload artifact ───────────────────────────────────────────────────
+      #
+      #  NOTE: GitHub always wraps artifacts in a zip — this cannot be changed.
+      #  The zip will only contain one file inside: MaceControl-X.X.X.jar
+      #  To get a raw JAR with NO unzipping needed, use either:
+      #
+      #    A) Releases page (best for distribution):
+      #       Go to Releases → Draft a new release → publish.
+      #       The JAR attaches as a direct download with no zip.
+      #
+      #    B) nightly.link (best for dev/test builds):
+      #       https://nightly.link/chinpatakdamdampro-web/MaceControl/workflows/build/main
+      #       Every build here downloads as a plain .jar — bookmark this.
+      #
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MaceControl-${{ github.sha }}
-          path: target/MaceControl-*.jar
+          name: ${{ env.JAR_NAME }}
+          path: target/${{ env.JAR_NAME }}
           if-no-files-found: error
 
-      # ── 5. On a release, attach the JAR to the GitHub Release page ──────────
+      # ── 6. Attach raw JAR to GitHub Release (no zip, direct download) ────────
       - name: Attach JAR to GitHub Release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: target/MaceControl-*.jar
+          files: target/${{ env.JAR_NAME }}
